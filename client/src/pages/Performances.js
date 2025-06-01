@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 const PerformanceModal = ({ image, onClose }) => {
@@ -33,15 +33,7 @@ const PerformanceModal = ({ image, onClose }) => {
 
 const Performances = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  
-  const performances = [
-    "https://source.unsplash.com/random/800x600/?indian-dance-1",
-    "https://source.unsplash.com/random/800x600/?indian-dance-2",
-    "https://source.unsplash.com/random/800x600/?indian-dance-3",
-    "https://source.unsplash.com/random/800x600/?indian-dance-4",
-    "https://source.unsplash.com/random/800x600/?indian-dance-5",
-    "https://source.unsplash.com/random/800x600/?indian-dance-6"
-  ];
+    const performances = Array(8).fill('/bg_image_home.jpg');
 
   return (
     <div className="min-h-screen bg-off-white py-20">
@@ -51,14 +43,13 @@ const Performances = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
-        >
-          <h1 className="font-serif text-5xl text-maroon mb-4">Our Performances</h1>
+        >          <h1 className="font-serif text-5xl text-maroon mb-4">Our Rangapravesham Gallery</h1>
           <p className="text-xl text-charcoal/80 max-w-2xl mx-auto">
-            Experience the grace and beauty of Kuchipudi through our stunning performances
+            Witness the culmination of years of dedication and training
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {performances.map((image, index) => (
             <motion.div
               key={index}
