@@ -1,0 +1,12 @@
+{
+  "name": "sai-meghna-dance-school",
+  "version": "1.0.0",
+  "description": "A classical Indian dance school website",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  }
+}
