@@ -2,14 +2,17 @@ import { motion } from 'framer-motion';
 
 const Home = () => {
   return (
-    <div className="bg-off-white">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center z-0"
+    <div className="bg-off-white">      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="fixed inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: 'url("/images/hero-bg.jpg")',
-            filter: 'brightness(0.7)'
+            backgroundImage: 'url("client\public\bg_image_home.jpg")',
+            filter: 'brightness(0.7)',
+            zIndex: -1
           }}
         />
         <div className="relative z-10 text-center text-white px-4">
@@ -38,12 +41,28 @@ const Home = () => {
             Start Your Journey
           </motion.button>
         </div>
-      </section>
-
-      {/* Featured Section */}
-      <section className="py-20 px-4">
+      </section>      {/* Featured Section */}
+      <section className="py-20 px-4 relative">
+        <img 
+          src="/mandala.svg" 
+          alt="" 
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-64 opacity-10 pointer-events-none"
+        />
+        <img 
+          src="/kolam-divider.svg" 
+          alt="" 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 opacity-20 pointer-events-none"
+        />
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-serif text-4xl text-center mb-16 text-charcoal">Why Choose Us</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="font-serif text-4xl text-center mb-16 text-charcoal"
+          >
+            Why Choose Us
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
@@ -73,18 +92,32 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="bg-maroon text-off-white py-20">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="font-serif text-4xl mb-6">Begin Your Dance Journey Today</h2>
-          <p className="text-lg mb-8 text-off-white/90">
-            Join our community of dancers and experience the joy of classical Indian dance.
-          </p>
-          <button className="bg-off-white text-maroon px-8 py-3 rounded-md font-medium hover:bg-off-white/90 transition-colors">
-            Contact Us
-          </button>
+      </section>      {/* Call to Action */}
+      <section className="relative bg-maroon text-off-white py-20 overflow-hidden">
+        <img 
+          src="/divider-curve.svg" 
+          alt="" 
+          className="absolute top-0 left-0 w-full transform -translate-y-1/2 opacity-10"
+        />
+        <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-serif text-4xl mb-6">Begin Your Dance Journey Today</h2>
+            <p className="text-lg mb-8 text-off-white/90">
+              Join our community of dancers and experience the joy of classical Indian dance.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-off-white text-maroon px-8 py-3 rounded-md font-medium hover:bg-off-white/90 transition-colors"
+            >
+              Contact Us
+            </motion.button>
+          </motion.div>
         </div>
       </section>
     </div>

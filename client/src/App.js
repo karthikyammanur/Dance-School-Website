@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,10 +8,10 @@ import Footer from './components/Footer';
 
 // Import pages
 import Home from './pages/Home';
-const About = () => <div className="min-h-screen bg-off-white">About Us</div>;
-const Performances = () => <div className="min-h-screen bg-off-white">Performances</div>;
-const Media = () => <div className="min-h-screen bg-off-white">Media</div>;
-const Contact = () => <div className="min-h-screen bg-off-white">Contact Us</div>;
+import About from './pages/About';
+import Performances from './pages/Performances';
+import Media from './pages/Media';
+import Contact from './pages/Contact';
 
 function App() {
   useEffect(() => {
@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className="App font-sans min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-grow">
@@ -36,7 +36,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
