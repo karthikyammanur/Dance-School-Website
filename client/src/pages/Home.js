@@ -1,46 +1,100 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 
 const Home = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
   return (
-    <div className="bg-off-white">      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="bg-off-white">
+      {/* Hero Section */}
+      <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <motion.div 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="fixed inset-0 bg-cover bg-center"
-          style={{ 
-            backgroundImage: 'url("client\public\bg_image_home.jpg")',
-            filter: 'brightness(0.7)',
-            zIndex: -1
-          }}
-        />
-        <div className="relative z-10 text-center text-white px-4">
+          style={{ y }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ 
+              backgroundImage: 'url("/bg_image_home.jpg")',
+              filter: 'brightness(0.7)',
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-maroon/30 to-maroon/60" />
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'url("/mandala.svg")',
+            backgroundSize: '400px',
+            backgroundRepeat: 'repeat',
+            opacity: 0.05,
+          }} />
+        </motion.div>
+
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <motion.h1 
-            className="font-serif text-5xl md:text-7xl mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            className="font-serif text-6xl md:text-7xl lg:text-8xl mb-6"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
             Sai Meghna Dance School
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl mb-8"
+            className="text-xl md:text-2xl mb-8 text-off-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
           >
-            Discover the beauty of classical Indian dance
+            Discover the timeless beauty of Kuchipudi through authentic classical training
           </motion.p>
-          <motion.button
-            className="bg-maroon text-off-white px-8 py-3 rounded-md font-medium hover:bg-maroon/90 transition-colors"
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.6 }}
           >
-            Start Your Journey
-          </motion.button>
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-maroon text-off-white px-8 py-4 rounded-md font-medium hover:bg-maroon/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Begin Your Journey
+              </motion.button>
+            </Link>
+          </motion.div>
         </div>
+
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <svg 
+            className="w-6 h-6 text-off-white opacity-80" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+            />
+          </svg>
+        </motion.div>
       </section>      {/* Featured Section */}
       <section className="py-20 px-4 relative">
         <img 
@@ -92,7 +146,37 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>      {/* Call to Action */}
+      </section>      {/* Testimonials */}
+      <section className="bg-off-white py-16 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-serif text-4xl text-maroon mb-4">Student Testimonials</h2>
+            <p className="text-xl text-charcoal/80">What our students say about their journey</p>
+          </motion.div>
+
+          <TestimonialCarousel />
+        </div>
+
+        {/* Decorative Elements */}
+        <img 
+          src="/mandala.svg" 
+          alt="" 
+          className="absolute top-0 right-0 w-64 opacity-10 pointer-events-none"
+        />
+        <img 
+          src="/kolam-divider.svg" 
+          alt="" 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 opacity-20 pointer-events-none"
+        />
+      </section>
+
+      {/* Call to Action */}
       <section className="relative bg-maroon text-off-white py-20 overflow-hidden">
         <img 
           src="/divider-curve.svg" 
@@ -110,13 +194,15 @@ const Home = () => {
             <p className="text-lg mb-8 text-off-white/90">
               Join our community of dancers and experience the joy of classical Indian dance.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-off-white text-maroon px-8 py-3 rounded-md font-medium hover:bg-off-white/90 transition-colors"
-            >
-              Contact Us
-            </motion.button>
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-off-white text-maroon px-8 py-3 rounded-md font-medium hover:bg-off-white/90 transition-colors"
+              >
+                Contact Us
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>
