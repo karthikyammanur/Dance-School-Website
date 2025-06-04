@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "framer-motion": "^12.15.0",
     "mongoose": "^8.15.1",
+    "nodemailer": "^7.0.3",
     "react-router-dom": "^7.6.1"
   }
 }
