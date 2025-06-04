@@ -19,15 +19,15 @@ const Home = () => {
         <motion.div 
           style={{ y }}
           className="absolute inset-0 w-full h-full"
-        >
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ 
-              backgroundImage: 'url("/bg_image_home.jpg")',
-              filter: 'brightness(0.7)',
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-maroon/30 to-maroon/60" />
+        >          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ filter: 'brightness(0.7)' }}
+          >
+            <source src="/masthead_bg_video.mp4" type="video/mp4" />          </video>
           <div className="absolute inset-0" style={{
             backgroundImage: 'url("/mandala.svg")',
             backgroundSize: '400px',
