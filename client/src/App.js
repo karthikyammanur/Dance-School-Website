@@ -5,6 +5,7 @@ import 'aos/dist/aos.css';
 import './App.css';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import ChatButton from './components/ChatButton';
 
 // Import pages
 import Home from './pages/Home';
@@ -37,6 +38,9 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        
+        {/* Floating chat button */}
+        <ChatButton />
       </div>
     </BrowserRouter>
   );
